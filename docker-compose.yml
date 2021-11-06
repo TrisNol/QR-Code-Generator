@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+
+  backend:
+    container_name: qr_code_generator_backend
+    hostname: qr_code_generator_backend
+    build: ./backend
+
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
+  frontend:
+    container_name: qr_code_generator_frontend
+    hostname: qr_code_generator_frontend
+    build: ./frontend
+
+    ports:
+      - 80:80
+    restart: unless-stopped
+    depends_on:
+      - backend
