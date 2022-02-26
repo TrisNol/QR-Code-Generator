@@ -35,5 +35,5 @@ jobs:
       - name: Build Docker image
         run: docker-compose build 
 
-      -name: Push Docker image to ghcr.io
+      - name: Push Docker image to ghcr.io
         run: docker-compose push
