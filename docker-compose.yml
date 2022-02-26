@@ -6,6 +6,7 @@ services:
     container_name: qr_code_generator_backend
     hostname: qr_code_generator_backend
     build: ./backend
+    image: ghcr.io/trisnol/qr-code-generator-backend
 
     ports:
       - 3000:3000
@@ -15,6 +16,7 @@ services:
     container_name: qr_code_generator_frontend
     hostname: qr_code_generator_frontend
     build: ./frontend
+    image: ghcr.io/trisnol/qr-code-generator-frontend
 
     ports:
       - 80:80
