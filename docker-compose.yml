@@ -21,5 +21,7 @@ services:
     ports:
       - 80:80
     restart: unless-stopped
+    environment:
+      - API_URL=http://localhost:3000
     depends_on:
       - backend

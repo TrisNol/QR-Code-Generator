@@ -1,3 +1,4 @@
+# TODO migrate to FastAPI
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS, cross_origin
 
@@ -9,16 +10,16 @@ cors = CORS(app)
 
 qr = QRCode()
 
-@app.route('/<path:path>', methods=['GET'])
-def static_proxy(path):
-    if path.endswith(".js"): 
-        return send_from_directory('./static', path, mimetype="application/javascript")
-    return send_from_directory('./static', path)
+# @app.route('/<path:path>', methods=['GET'])
+# def static_proxy(path):
+#     if path.endswith(".js"): 
+#         return send_from_directory('./static', path, mimetype="application/javascript")
+#     return send_from_directory('./static', path)
 
 
-@app.route('/')
-def root():
-  return send_from_directory('./static', 'index.html')
+# @app.route('/')
+# def root():
+#   return send_from_directory('./static', 'index.html')
 
 
 @app.route('/generateCode', methods=['POST'])
@@ -30,5 +31,6 @@ def cloud():
     code = encodeImageToBase64(code)
     return {'code': code}
 
+# TODO Read port from ENV, upgrade to FastAPI
 if __name__ == "__main__":
     app.run(debug=False, port=3000, host='0.0.0.0')

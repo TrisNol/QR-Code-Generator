@@ -15,6 +15,6 @@ export class ImageService {
   }
 
   public generateQRCode(content: string): Observable<any> {
-    return this.http.post(environment.basehref + "/generateCode", { content: content });
+    return this.http.post(environment.apiUrl + "/generateCode", { content: content });
   }
 }
