@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Call composite workflow 
-        uses: trisnol/workflows/angular-main@feature/angular-main-workflow
+        uses: trisnol/workflows/angular-main@main
         with: 
           node_version: 16
           path: ./frontend
