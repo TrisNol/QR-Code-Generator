@@ -1,7 +1,9 @@
 <div class="mainDiv">
-    <input mat-input [(ngModel)]="content">
-    <div>
-        <button mat-raised-button color="primary" (click)="createCode()">Create QR Code</button>
-    </div>
-    <img *ngIf="qrCode" [src]=qrCode [attr.width]="256" [attr.height]="256">
+  <input mat-input [(ngModel)]="content">
+  <div>
+    <button mat-raised-button color="primary" (click)="createCode()">Create QR Code</button>
+  </div>
+  @if (qrCode) {
+    <img [src]=qrCode [attr.width]="256" [attr.height]="256">
+  }
 </div>
