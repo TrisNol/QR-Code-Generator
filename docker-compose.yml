@@ -1,7 +1,4 @@
-version: '3.3'
-
 services:
-
   backend:
     container_name: qr_code_generator_backend
     hostname: qr_code_generator_backend

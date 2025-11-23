@@ -1,36 +1,46 @@
-# TODO migrate to FastAPI
-from flask import Flask, request, send_from_directory
-from flask_cors import CORS, cross_origin
+# Migrated to FastAPI
+import os
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings
 
 from utils.QRCode import QRCode
 from utils.imageCoding import encodeImageToBase64
 
-app = Flask(__name__)
-cors = CORS(app)
+class Settings(BaseSettings):
+    app_name: str = 'QR Code Generator Backend'
+    app_version: str = '1.0.0'
+    port: int = 3000
+
+
+settings = Settings()
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 qr = QRCode()
 
-# @app.route('/<path:path>', methods=['GET'])
-# def static_proxy(path):
-#     if path.endswith(".js"): 
-#         return send_from_directory('./static', path, mimetype="application/javascript")
-#     return send_from_directory('./static', path)
+
+class GenerateRequest(BaseModel):
+    content: str
 
 
-# @app.route('/')
-# def root():
-#   return send_from_directory('./static', 'index.html')
+@app.post('/generateCode')
+async def generate_code(req: GenerateRequest):
+    """Generate a QR code for the provided content and return base64 image string."""
+    code_img = qr.generateQrCode(req.content)
+    code_b64 = encodeImageToBase64(code_img)
+    return {"code": code_b64}
 
 
-@app.route('/generateCode', methods=['POST'])
-@cross_origin()
-def cloud():
-    data = request.json
-    content = data['content']
-    code = qr.generateQrCode(content)
-    code = encodeImageToBase64(code)
-    return {'code': code}
-
-# TODO Read port from ENV, upgrade to FastAPI
 if __name__ == "__main__":
-    app.run(debug=False, port=3000, host='0.0.0.0')
+    port = int(os.environ.get("PORT", settings.port))
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
