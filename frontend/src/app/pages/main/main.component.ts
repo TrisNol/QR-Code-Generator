@@ -1,23 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  standalone: false
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   public content: string = "";
-  public qrCode: any = null;
+  public qrCode = signal<any>(null);
   constructor(private imageService: ImageService) { }
 
-  ngOnInit(): void {
-  }
-
-  createCode(){
+  createCode() {
     this.imageService.generateQRCode(this.content).subscribe(res => {
-        this.qrCode= this.imageService.decodeImage(res.code);
+      this.qrCode.set(this.imageService.decodeImage(res.code));
     })
   }
 
