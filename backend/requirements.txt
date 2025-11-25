@@ -6,7 +6,7 @@ fastapi==0.121.3
 h11==0.16.0
 httptools==0.7.1
 idna==3.11
-numpy==2.2.6
+numpy==2.3.5
 opencv-python==4.12.0.88
 pillow==12.0.0
 pydantic==2.12.4
