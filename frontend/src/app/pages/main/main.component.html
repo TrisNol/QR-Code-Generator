@@ -4,6 +4,6 @@
     <button mat-raised-button color="primary" (click)="createCode()">Create QR Code</button>
   </div>
   @if (qrCode()) {
-    <img [src]=qrCode() [attr.width]="256" [attr.height]="256">
+    <img [src]="qrCode()" [attr.width]="256" [attr.height]="256">
   }
 </div>

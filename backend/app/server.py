@@ -2,7 +2,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
 
 from utils.QRCode import QRCode
@@ -28,7 +28,7 @@ qr = QRCode()
 
 
 class GenerateRequest(BaseModel):
-    content: str
+    content: str = Field(min_length=1, max_length=1000, frozen=True)
 
 
 @app.post('/generateCode')
