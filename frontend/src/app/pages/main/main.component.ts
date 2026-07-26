@@ -1,10 +1,11 @@
-import { Component, signal } from '@angular/core';
-import { ImageService } from 'src/app/services/image.service';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class MainComponent {

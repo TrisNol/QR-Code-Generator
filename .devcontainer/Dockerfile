@@ -14,5 +14,6 @@ RUN apt-get update && apt-get -y install python-is-python3 python3.13-full && ap
 # Install Node.js 22 and Angular
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -y nodejs && apt-get clean
 RUN npm install -g @angular/cli
+RUN npm i -g npm@11.18.0
 
 USER vscode
