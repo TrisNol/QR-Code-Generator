@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: window["env"]["apiUrl"] || "http://localhost:3000",
-  debug: window["env"]["debug"] || false
+  apiUrl: window["env"]?.["apiUrl"] || "http://localhost:3000",
+  debug: window["env"]?.["debug"] || false
 };
 
 /*
